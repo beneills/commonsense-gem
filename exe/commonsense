@@ -25,6 +25,8 @@ def main
     puts
     puts 'This utility checks each file against the commonsense text specification'
     puts 'returning good exit status only if all inputs are valid.'
+    puts
+    puts 'See https://github.com/beneills/commonsense-spec for more information.'
     exit 0
   else
     results = ARGV.map do |filename|
