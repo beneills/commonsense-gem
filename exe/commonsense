@@ -1,3 +1,48 @@
 #!/usr/bin/env ruby
 
 require "commonsense"
+
+def test_valididty(name, text)
+  is_valid = Commonsense::valid? text
+
+  if is_valid
+    puts "#{name} is valid commonsense text."
+  else
+    puts "#{name} is not valid commonsense text!"
+  end
+
+  is_valid
+end
+
+def main
+  if ARGV.empty?
+    status = test_valididty "STDIN", STDIN.read
+    exit status
+  elsif ARGV.length == 1 and ['--help', '-h'].include?(ARGV.first)
+    puts 'usage: commonsense [FILE...]'
+    puts
+    puts '  where each FILE is a filename or - for standard input.'
+    puts
+    puts 'This utility checks each file against the commonsense text specification'
+    puts 'returning good exit status only if all inputs are valid.'
+    exit 0
+  else
+    results = ARGV.map do |filename|
+      if filename == "-"
+        test_valididty "STDIN", STDIN.read
+      else
+        if File.file? filename
+          test_valididty filename, File.read(filename)
+        else
+          puts "#{filename} does not exist as a regular file!"
+
+          false
+        end
+      end
+    end
+
+    exit results.all?
+  end
+end
+
+main
