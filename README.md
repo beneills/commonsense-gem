@@ -1,6 +1,6 @@
 # Commonsense
 
-Validate text against the [commonsense specification](https://github.com/beneills/commonsense-spec.) to resist authorship analysis.  See the spec for more information.
+Validate text against the [commonsense specification](https://github.com/beneills/commonsense-spec) to resist authorship analysis.  See the spec for more information.
 
 This gem contains a Ruby library and single executable.
 
