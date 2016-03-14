@@ -18,11 +18,11 @@ class CommonsenseTest < Minitest::Test
 
     # single-line sentences
     assert ::Commonsense::valid? "Writing against government."
-    assert ::Commonsense::valid? "Writing against government. Free talk be healthy."
+    assert ::Commonsense::valid? "Writing against government. Free talk is healthy."
 
     # multi-line texts
     assert ::Commonsense::valid? "writing\nagainst\n\ngovernment"
-    assert ::Commonsense::valid? "Protest\n\nWriting against government. Free talk be healthy.\n\norganization"
+    assert ::Commonsense::valid? "Protest\n\nWriting against the government. Free talk is healthy.\n\norganization"
 
     # Edge-case texts
     assert ::Commonsense::valid? "I"
@@ -31,7 +31,7 @@ class CommonsenseTest < Minitest::Test
   end
 
   def test_bad_characters
-    refute ::Commonsense::valid? "writing $ be bad"
+    refute ::Commonsense::valid? "writing $ was bad"
     refute ::Commonsense::valid? "_"
     refute ::Commonsense::valid? "-"
     refute ::Commonsense::valid? "bad\r"
@@ -75,4 +75,25 @@ class CommonsenseTest < Minitest::Test
     refute ::Commonsense::valid? "Writing.."
   end
 
+  def test_pronouns
+    assert ::Commonsense::valid? "They protest."
+  end
+
+  def test_conjugations
+    assert ::Commonsense::valid? "I came. I saw. I took."
+  end
+
+  def test_wordlist_duplicates
+    basic        = ::Commonsense::BasicEnglish::BASIC_WORDS
+    pronouns     = ::Commonsense::BasicEnglish::PRONOUNS
+    conjugations = ::Commonsense::BasicEnglish::CONJUGATIONS
+
+    assert basic.detect { |e| basic.count(e) > 1 }.nil?
+    assert pronouns.detect { |e| pronouns.count(e) > 1 }.nil?
+    assert conjugations.detect { |e| conjugations.count(e) > 1 }.nil?
+
+    assert ( basic & pronouns ).empty?
+    assert ( basic & conjugations ).empty?
+    assert ( pronouns & conjugations ).empty?
+  end
 end

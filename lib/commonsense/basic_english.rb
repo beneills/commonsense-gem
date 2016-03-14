@@ -1,6 +1,6 @@
 module Commonsense
   module BasicEnglish
-    WORDS = [
+    BASIC_WORDS = [
       'come',
       'get',
       'give',
@@ -311,7 +311,7 @@ module Commonsense
       'money',
       'month',
       'morning',
-      'other',
+      'mother',
       'motion',
       'mountain',
       'move',
@@ -854,6 +854,94 @@ module Commonsense
     ]
 
     ##
+    # The following is a manual attempt at listing simple pronouns not already in the above list.
+    #
+
+    PRONOUNS = [
+      'she',
+      'it',
+      'we',
+      'they'
+    ]
+
+    ##
+    # The following is a manual attempt at listing simple conjugations of the verbs above.
+    #
+    # The present tense indicative forms of each verb are included, along with special cases 'was' and 'were'.
+    #
+
+    CONJUGATIONS = [
+      # come
+      'comes',
+      'came',
+
+      # get
+      'gets',
+      'got',
+
+      # give
+      'gives',
+      'gave',
+      'given',
+
+      # go
+      'goes',
+      'gone',
+
+      # keep
+      'keeps',
+      'kept',
+
+      # let
+      'lets',
+
+      # make
+      'makes',
+      'made',
+
+      # put
+      'puts',
+
+      # seem
+      'seems',
+      'seemed',
+
+      # take
+      'takes',
+      'took',
+
+      # be
+      'am',
+      'are',
+      'is',
+      'was',
+      'were',
+
+      # do
+      'does',
+      'done',
+
+      # say
+      'says',
+      'said',
+
+      # see
+      'sees',
+      'saw',
+
+      # send
+      'sends',
+      'sent'
+    ]
+
+    ##
+    # Basic words and conjugations thereof.
+
+    def self.words
+      BASIC_WORDS + PRONOUNS + CONJUGATIONS
+    end
+
+    ##
     # Tests whether a word is included in our version of Ogden's Basic English word list,
     # and therefore suitable as, e.g. a mid-sentence word.
     #
@@ -862,7 +950,7 @@ module Commonsense
     # +word+ should be a case-sensitive string.
 
     def self.valid?(word)
-      WORDS.include? word
+      words.include? word
     end
 
     ##
