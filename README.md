@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/beneills/commonsense-gem.svg?branch=master)](https://travis-ci.org/beneills/commonsense-gem)
+
+
 # Commonsense
 
 Validate text against the [commonsense specification](https://github.com/beneills/commonsense-spec) to resist authorship analysis.  See the spec for more information.
