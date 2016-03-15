@@ -18,6 +18,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Todo
 
 + ~~allow verb conjugates~~
++ give more specific feedback about error
 + add feature to publish to anonymous pastebins
 
 ## Contributing
